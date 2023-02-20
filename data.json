@@ -1,0 +1,5 @@
+[   {"id":1, "nombre":"Oreo", "precio":800, "descripcion":"Una capa de Oreo, dulce de leche y crema chantillí.","img":"./img/oreo.png"},
+    {"id":2, "nombre":"Chocolina", "precio":750, "descripcion":"Una capa de Chocolinas, dulce de leche y crema chantillí.","img":"./img/chocotorta.png"},
+    {"id":3, "nombre":"Gula", "precio":850, "descripcion":"Una capa de Chocolinas y Oreo, dulce de leche y crema chantillí.","img":"./img/gula.png"},
+    {"id":4, "nombre":"Cheesecake", "precio":750, "descripcion":"Capa de Vanillas recubiertas de queso crema y futos rojos.","img":"./img/cheesecake.png"}
+ ]
