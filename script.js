@@ -49,7 +49,7 @@ let conDesEfectivo = 0;
 const comprar = document.getElementById("comprar");
 comprar.disabled = true;
 
-fetch("/data.json")
+fetch("./data.json")
   .then((res) => res.json())
   .then(async (data) => {
     await accionAsincrona();
