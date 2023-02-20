@@ -97,7 +97,7 @@ fetch("./data.json")
     });
     actualizaTotalCarrito();
   })
-  // .catch((err) => console.log(err));
+   .catch((err) => console.log("error"));
 
 const accionAsincrona = async () => {
   return new Promise((resolve, reject) => {
