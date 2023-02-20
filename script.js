@@ -54,7 +54,7 @@ fetch("./data.json")
   .then(async (data) => {
     await accionAsincrona();
     data.forEach((postre) => {
-      console.log(data);
+ 
       let postreRenderizado = document.createElement("div");
       postreRenderizado.className = "col-xl-3";
 
@@ -97,7 +97,7 @@ fetch("./data.json")
     });
     actualizaTotalCarrito();
   })
-   .catch((err) => console.log("error"));
+   .catch((err) => console.log(err));
 
 const accionAsincrona = async () => {
   return new Promise((resolve, reject) => {
