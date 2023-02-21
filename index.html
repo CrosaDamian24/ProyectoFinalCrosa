@@ -14,110 +14,96 @@
 </head>
 
 <body>
+    <!-- Para la carga asin -->
     <div id="spinner">
         <div class="lds-dual-ring ">&nbsp
         </div>
     </div>
 
+    <!-- Contenedor con titulo, logo de carrito y cantidad -->
     <div class="container">
-
+        <!-- Titulo -->
         <div class="row">
             <h1 class="text-center">Postres Online</h1>
         </div>
 
-
+        <!-- Boton de carrito y cantidad -->
         <div class="row d-flex">
             <div class='col-xl-10'>
 
             </div>
-            <div class='col-xl-1 text-end'>
+            <div class='col-xl-2 text-end '>
 
-                <button id="carrito" type="button" class="border-0 prueba" data-bs-toggle="modal"
+                <button id="carrito" type="button" class="border-0" data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop1">
                     🛒
                 </button>
+                <div class="modal fade " id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 " id="staticBackdropLabel">Su carrito</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div id="modalcarrito" class="modal-body">
 
-            </div>
-            <div class='col-xl-1   text-start'>
-
-
+                            </div>
+                            <!-- <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
                 <output id="totcarro" class="text-bg-danger cantidad" type="number" readonly></output>
-
-
             </div>
-
         </div>
-
     </div>
-    <br>
 
-    <div class="container align-content-xl-between">
+    <!-- Seccion con los postres, opciones de pago, envio y compra -->
+    <div class="container align-content-xl-between mt-2">
         <!-- postres -->
         <div class="row" id="div">
-
         </div>
 
-        <br>
-        <div class="col-xl-6">
-            <a>Desea Envio?</a>
-            <select name="" id="envio">
+        <!-- Envio -->
+        <div class="col-xl-6 m-2">
+            <strong> <a>Desea Envio?</a></strong>
+            <select name="" id="envio" class="bg-primary text-white">
                 <option value="NO">NO</option>
                 <option value="SI">SI</option>
-
             </select>
-
-            <output type="text" id="precio"></output>
-
+            <strong>
+                <output type="text" id="precio" class="text-danger"></output>
+            </strong>
         </div>
-        <br>
-        <div class="col-xl-6">
-            <a>Medio de pago</a>
-            <select name="" id="medioPago">
+
+        <!-- Medio de pago -->
+        <div class="col-xl-6 m-2">
+            <strong><a>Medio de pago</a></strong>
+            <select name="" id="medioPago" class="bg-primary text-white">
                 <option value="DEBITO">Debito</option>
                 <option value="EFECTIVO">Efectivo</option>
-
             </select>
-
-            <output type="text" id="descuento"></output>
-
+            <strong>
+                <output type="text" id="descuento" class="text-danger"></output>
+            </strong>
         </div>
-        <br>
 
-        <!-- Button trigger modal -->
-        <button id="comprar" type="button" class="btn btn-primary" data-bs-toggle="modal"
+        <!-- Button Comprar -->
+        <button id="comprar" type="button" class="btn btn-primary m-1" data-bs-toggle="modal"
             data-bs-target="#staticBackdrop">
             Comprar
         </button>
+    </div>
 
-
-        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Postres Online</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div id="modalcarrito" class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-
-
-
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <!-- <button type="button" class="btn btn-primary">Understood</button> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-            crossorigin="anonymous"></script>
-        <script src="script.js">        </script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="script.js">        </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>

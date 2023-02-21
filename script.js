@@ -1,10 +1,11 @@
 //postresnombre
 class Postres {
-  constructor(id, nombre, precio, descripcion) {
+  constructor(id, nombre, precio, descripcion, imagen) {
     this.id = id;
     this.nombre = nombre;
     this.precio = precio;
     this.descripcion = descripcion;
+    this.imagen = imagen;
   }
   sumaIva(precio) {
     return (precio = precio * 1.21);
@@ -15,32 +16,35 @@ const postreInd = [
     1,
     "Oreo",
     800,
-    "Una capa de Oreo, dulce de leche y crema chantillí."
+    "Una capa de Oreo, dulce de leche y crema chantillí.",
+    "./img/oreo.png"
   ),
   new Postres(
     2,
     "Chocolina",
     750,
-    "Una capa de Chocolinas, dulce de leche y crema chantillí."
+    "Una capa de Chocolinas, dulce de leche y crema chantillí.",
+    "./img/chocotorta.png"
   ),
   new Postres(
     3,
     "Gula",
     850,
-    "Una capa de Chocolinas y Oreo, dulce de leche y crema chantillí."
+    "Una capa de Chocolinas y Oreo, dulce de leche y crema chantillí.",
+    "./img/gula.png"
   ),
   new Postres(
     4,
     "Cheesecake",
     750,
-    "Capa de Vanillas recubiertas de queso crema y futos rojos"
+    "Capa de Vanillas recubiertas de queso crema y futos rojos",
+    "./img/cheesecake.png"
   ),
 ];
 
 const div = document.getElementById("div");
-// const carrito = [];
-const iconoCarro = document.getElementById("carrito")
-iconoCarro.disabled = true
+const iconoCarro = document.getElementById("carrito");
+iconoCarro.disabled = true;
 
 const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let sumaTotalCarro = 0;
@@ -54,12 +58,11 @@ fetch("./data.json")
   .then(async (data) => {
     await accionAsincrona();
     data.forEach((postre) => {
- 
       let postreRenderizado = document.createElement("div");
       postreRenderizado.className = "col-xl-3";
 
       postreRenderizado.innerHTML = `
-    <div  class="card"  >
+          <div  class="card"  >
           <div class="card-body">
             <h5 class="card-title">Postre ${postre.nombre}</h5>
             <img src=${postre.img} alt="" class="img-fluid">
@@ -97,7 +100,7 @@ fetch("./data.json")
     });
     actualizaTotalCarrito();
   })
-   .catch((err) => console.log(err));
+  .catch((err) => console.log(err));
 
 const accionAsincrona = async () => {
   return new Promise((resolve, reject) => {
@@ -156,13 +159,14 @@ const añadePostre = (postre) => {
       nombre: postre.nombre,
       precio: postre.sumaIva(postre.precio),
       cantidad: 1,
+      imagen: postre.imagen,
     });
   } else {
     productoExiste.cantidad = productoExiste.cantidad + 1;
     productoExiste.precio =
       productoExiste.precio + postre.sumaIva(postre.precio);
   }
-  iconoCarro.disabled = false
+  iconoCarro.disabled = false;
   subirCarritoLocal();
   actualizaTotalCarrito();
 
@@ -197,10 +201,9 @@ const quitaPostre = (nombre, precio) => {
 
         const restaProducto = document.getElementById(nombre + iterator.id);
 
-        //  restaProducto.remove()
         restaProducto.disabled = true;
         cantidad.value = "";
-        iconoCarro.disabled = true
+        iconoCarro.disabled = true;
       }
     }
     carrito.precio = iterator.precio;
@@ -229,16 +232,19 @@ function actualizaTotalCarrito() {
     cantidad.innerHTML = cantida.cantidad;
     restaProducto.disabled = false;
     comprar.disabled = false;
-    iconoCarro.disabled = false
+    iconoCarro.disabled = false;
   }
-  
+
   sumaTotalCarro = sumaTot;
   document.getElementById("totcarro").value = tot;
+  if (tot === 0) {
+    carro.disabled = true;
+  }
 }
 
 // selector de envio
 const envio = document.getElementById("envio");
-const precioEnvio = document.getElementById("precio")
+const precioEnvio = document.getElementById("precio");
 
 envio.addEventListener("change", () => {
   if (envio.value === "SI") {
@@ -252,7 +258,7 @@ envio.addEventListener("change", () => {
 
 // selector de medio de pago
 const medioPago = document.getElementById("medioPago");
-const descuentoPago = document.getElementById("descuento")
+const descuentoPago = document.getElementById("descuento");
 
 medioPago.addEventListener("change", () => {
   if (medioPago.value === "EFECTIVO") {
@@ -265,12 +271,11 @@ medioPago.addEventListener("change", () => {
 });
 
 // boton de compra
-  comprar.addEventListener("click", () =>
+comprar.addEventListener("click", () =>
   calculosCompraFin(conEnvio, conDesEfectivo, sumaTotalCarro)
 );
 
-
-
+// funcion de compra
 const calculosCompraFin = (conEnvio, conDesEfectivo, sumaTotalCarro) => {
   let precioTotal = 0;
   let mensaje = "";
@@ -297,7 +302,7 @@ const calculosCompraFin = (conEnvio, conDesEfectivo, sumaTotalCarro) => {
     }
 
     comprar.disabled = true;
-    iconoCarro.disabled = true
+    iconoCarro.disabled = true;
 
     swal({
       title: "Compra realizada con éxito!",
@@ -308,8 +313,8 @@ const calculosCompraFin = (conEnvio, conDesEfectivo, sumaTotalCarro) => {
 
     for (const carro of carrito) {
       const resta = document.getElementById(carro.nombre + carro.id);
-      const cantidad = document.getElementById(carro.nombre)
-      cantidad.value = ""
+      const cantidad = document.getElementById(carro.nombre);
+      cantidad.value = "";
 
       resta.disabled = true;
     }
@@ -317,7 +322,6 @@ const calculosCompraFin = (conEnvio, conDesEfectivo, sumaTotalCarro) => {
     subirCarritoLocal();
     actualizaTotalCarrito();
   }
-
 };
 
 //boton carrito de compras
@@ -333,15 +337,65 @@ function muestraCarrito() {
 
   carro.forEach((carro) => {
     total = carrito.reduce((acc, el) => acc + el.precio, 0);
-    console.log(carro.nombre);
 
     const agregaProductos = document.createElement("div");
-    agregaProductos.innerHTML = ` <h4> ${carro.cantidad} x ${carro.nombre} <strong>$${carro.precio}</strong> </h4>`;
+    agregaProductos.innerHTML = `<div class="row">
+                                    <div class="col-1">
+                                      <h6> ${carro.cantidad}</h6>
+                                    </div>
+                                    <div class="col-1">
+                                        <h6>X</h6>
+                                    </div>
+                                    <div class="col-4">
+                                        <img src="${carro.imagen}" alt="" class="img-fluid w-25">
+                                    </div>
+                                    <div class="col-4 text-end">
+                                      <strong>$ ${carro.precio.toFixed(2)} </strong>
+                                    </div>
+                                    <div class="col-2 text-start">
+                                      <button id="eliminar${carro.id}" class="border-0 text-danger">
+                                                 🗑️
+                                      </button>
+                                    </div>
+                                  </div>`;
     padre.appendChild(agregaProductos);
+    const eliminar = document.getElementById("eliminar" + carro.id);
+
+    eliminar.addEventListener("click", () => quitoProducto(carro.id));
   });
 
+  const quitoProducto = (id) => {
+    const indice = carrito.findIndex((elemento) => {
+      if (elemento.id === id) {
+        const restaProducto = document.getElementById(elemento.nombre + id);
+        const cantidad = document.getElementById(elemento.nombre);
+        cantidad.value = "";
+
+        restaProducto.disabled = true;
+        return true;
+      }
+
+    });
+    carrito.splice(indice, 1);
+
+    subirCarritoLocal();
+    actualizaTotalCarrito();
+    muestraCarrito();
+
+  };
+
   const totalCarro = document.createElement("div");
-  totalCarro.innerHTML = ` <h3>Total <strong>$ ${total}</strong> </h3>`;
+  totalCarro.className = "row";
+  totalCarro.innerHTML =
+    total === 0
+      ? ` <h5>Sin productos en el carrito </h5>`
+      : ` <div class="col-7 text-end">
+      <h5>Total</h5>
+      </div>
+      <div class="col-3 text-danger text-end  ">
+      <strong>$ ${total.toFixed(2)}</strong> 
+      </div>`;
+
   padre.appendChild(totalCarro);
 }
 
