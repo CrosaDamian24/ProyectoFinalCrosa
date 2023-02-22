@@ -1,8 +1,93 @@
+.fuente {
+  font-family: "Nunito", sans-serif
+}
+
+.fuenteTitulo {
+  font-family: cursive;
+  color: #540e51;
+  font-weight: bolder;
+
+}
+
+.fondo {
+  background-image: url(../img/fondo.jpg);
+  background-size: 130%;
+}
+
+.btn__agrego {
+  background-color: #540e51;
+  color: white
+}
+
+.carrito {
+  background-color: #540e51;
+  opacity: 95%;
+  color: white;
+  font-family:"Nunito", sans-serif ;
+  max-width: 100%;
+}
+
+
+.btn__agrego:hover {
+  background-color: #540e51;
+  color: white
+}
+
+.btn__quito {
+  background-color: #ed0c80;
+  color: white
+}
+
+.btn__quito:hover {
+  background-color: #ed0c80;
+  color: white
+}
+
+/* .btn--formato{
+width: 100px;
+border-radius: 10px;
+
+} */
+
+.selectorColor {
+  background-color: #540e51;
+  color: white;
+  width: 100px;
+  border-radius: 10px;
+  border-color: #540e51;
+
+}
+
+.selectorColor:hover {
+  background-color: #540e51;
+  color: white;
+}
+
 .cantidad {
-  /* border-radius: 50%; */
-  padding: 3px; 
+  border-radius: 50%;
+  background-color: #540e51;
+  color: white;
+  padding: 3px;
   height: 100%;
 
+}
+
+.card__sombra {
+  box-shadow: 0px 0px 10px 5px #e3c1dd;
+
+}
+
+.card__sombra--modificada {
+  opacity: 75%;
+
+}
+
+.color__papelera {
+  background-color: transparent;
+}
+
+.colorboton {
+  background-color: transparent;
 }
 
 .lds-dual-ring {
@@ -11,28 +96,31 @@
   height: 100vh;
   z-index: 100;
   position: absolute;
-  background-color: #45e325;
+  background-color: #ed0c80;
 
 }
+
 .lds-dual-ring:after {
   content: " ";
   display: block;
   width: 100px;
   height: 100px;
-   /* margin: 300px; */
-     position: absolute;
-   top: 50%;
-   left: 50%;
-   margin: -25px 0 0 -25px; 
-     border-radius: 50%;
-  border: 6px solid black;
-  border-color: black transparent black transparent;
+  /* margin: 300px; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -25px 0 0 -25px;
+  border-radius: 50%;
+  border: 6px solid white;
+  border-color: white transparent white transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
+
 @keyframes lds-dual-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

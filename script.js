@@ -46,6 +46,7 @@ const div = document.getElementById("div");
 const iconoCarro = document.getElementById("carrito");
 iconoCarro.disabled = true;
 
+
 const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let sumaTotalCarro = 0;
 let conEnvio = 0;
@@ -62,9 +63,10 @@ fetch("./data.json")
       postreRenderizado.className = "col-xl-3";
 
       postreRenderizado.innerHTML = `
-          <div  class="card"  >
-          <div class="card-body">
-            <h5 class="card-title">Postre ${postre.nombre}</h5>
+          <div  class="card card__sombra"  >
+          <div class="card-body fuente">
+          
+          <strong> <h5 class="card-title text-center ">Postre ${postre.nombre}</h5></strong>
             <img src=${postre.img} alt="" class="img-fluid">
             <p class="card-text">${postre.descripcion}</p>
                 <span>Precio: <strong>$ ${
@@ -78,8 +80,8 @@ fetch("./data.json")
                 } type="number" readonly ></output></strong>
                 <br>
 
-            <button class="btn btn-primary" id = ${postre.id}>+</button>
-            <button class="btn btn-danger" disabled id = ${
+            <button class="btn btn__agrego" id = ${postre.id}>+</button>
+            <button class="btn  btn-danger btn__quito" disabled id = ${
               postre.nombre + postre.id
             }>-</button>
         </div>
@@ -106,7 +108,7 @@ const accionAsincrona = async () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve();
-    }, 1000);
+    }, 1500);
   });
 };
 
@@ -172,7 +174,9 @@ const añadePostre = (postre) => {
 
   Toastify({
     text: "Añadido al carrito",
-
+    style: {
+      background: "#540e51",
+    },
     duration: 3000,
   }).showToast();
 };
@@ -214,7 +218,7 @@ const quitaPostre = (nombre, precio) => {
   Toastify({
     text: "Quitado del carrito",
     style: {
-      background: "#b00000",
+      background: "#ed0c80",
     },
     duration: 3000,
   }).showToast();
@@ -245,6 +249,8 @@ function actualizaTotalCarrito() {
 // selector de envio
 const envio = document.getElementById("envio");
 const precioEnvio = document.getElementById("precio");
+
+
 
 envio.addEventListener("change", () => {
   if (envio.value === "SI") {
@@ -346,14 +352,17 @@ function muestraCarrito() {
                                     <div class="col-1">
                                         <h6>X</h6>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-1">
+                                        <h6>${carro.nombre}</h6>
+                                    </div>
+                                    <div class="col-3">
                                         <img src="${carro.imagen}" alt="" class="img-fluid w-25">
                                     </div>
                                     <div class="col-4 text-end">
                                       <strong>$ ${carro.precio.toFixed(2)} </strong>
                                     </div>
-                                    <div class="col-2 text-start">
-                                      <button id="eliminar${carro.id}" class="border-0 text-danger">
+                                    <div class=" col-2 text-start">
+                                      <button id="eliminar${carro.id}" class="color__papelera border-0">
                                                  🗑️
                                       </button>
                                     </div>
@@ -389,10 +398,10 @@ function muestraCarrito() {
   totalCarro.innerHTML =
     total === 0
       ? ` <h5>Sin productos en el carrito </h5>`
-      : ` <div class="col-7 text-end">
+      : ` <div class="col-6 text-end">
       <h5>Total</h5>
       </div>
-      <div class="col-3 text-danger text-end  ">
+      <div class="col-4 text-danger text-end  ">
       <strong>$ ${total.toFixed(2)}</strong> 
       </div>`;
 
