@@ -112,41 +112,6 @@ const accionAsincrona = async () => {
   });
 };
 
-// postreInd.forEach((postre) => {
-
-//   let postreRenderizado = document.createElement("div");
-//   postreRenderizado.className = "col-xl-3";
-
-//   postreRenderizado.innerHTML = `
-//     <div  class="card"  >
-//           <div id= ${postre.nombre} class="card-body">
-//             <h5 class="card-title">Postre ${postre.nombre}</h5>
-//             <p class="card-text">${postre.descripcion}</p>
-//                 <span>Precio: $ ${postre.precio}</span>
-//                 <br>
-//                 <p>Cantidad</p>
-
-//             <button class="btn btn-primary" id = ${postre.id}>+</button>
-//             <button class="btn btn-danger" disabled id = ${
-//               postre.nombre + postre.id
-//             }>-</button>
-//         </div>
-//     </div>
-//     </div>
-//     `;
-//   div.append(postreRenderizado);
-
-//   const boton = document.getElementById(postre.id);
-//   boton.addEventListener("click", () => añadePostre(postre));
-
-//   const restaProducto = document.getElementById(postre.nombre + postre.id);
-//   restaProducto.addEventListener("click", () =>
-//     quitaPostre(postre.nombre, postre.sumaIva(postre.precio))
-//   );
-// });
-
-// actualizaTotalCarrito()
-
 // AGREGO POSTRE AL CARRITO
 const añadePostre = (postre) => {
   let productoExiste = carrito.find((item) => item.id === postre.id);
@@ -251,7 +216,6 @@ const envio = document.getElementById("envio");
 const precioEnvio = document.getElementById("precio");
 
 
-
 envio.addEventListener("change", () => {
   if (envio.value === "SI") {
     precioEnvio.value = " $500";
@@ -291,11 +255,7 @@ const calculosCompraFin = (conEnvio, conDesEfectivo, sumaTotalCarro) => {
       ? sumaTotalCarro - sumaTotalCarro * 0.05
       : sumaTotalCarro;
 
-  // if (conDesEfectivo === 1) {
-  //   precioTotal = sumaTotalCarro - sumaTotalCarro * 0.05;
-  // } else {
-  //   precioTotal = sumaTotalCarro;
-  // }
+
   if (precioTotal !== 0) {
     if (conEnvio === 1) {
       precioTotal = precioTotal + 500;
@@ -328,6 +288,17 @@ const calculosCompraFin = (conEnvio, conDesEfectivo, sumaTotalCarro) => {
     subirCarritoLocal();
     actualizaTotalCarrito();
   }
+
+  // limpio los selectores
+  const selectPrecio = document.getElementById("envio")
+  const optionPrecio = document.getElementById("precio")
+  selectPrecio.value= "NO"
+  optionPrecio.value = ""
+
+  const selectDescuento1 = document.getElementById("medioPago")
+  const optionDescuento = document.getElementById("descuento")
+  selectDescuento1.value = "DEBITO"
+  optionDescuento.value = ""
 };
 
 //boton carrito de compras
