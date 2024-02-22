@@ -1,6 +1,6 @@
 
 # Ecommers Postres
-
+App para encargar postres. (Front-end)
 
 ## Tech Stack
 
